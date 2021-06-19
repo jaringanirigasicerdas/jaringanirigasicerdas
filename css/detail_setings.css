@@ -1,0 +1,70 @@
+.big-section p{
+    line-height: 2rem;
+    font-size: 1.3rem;
+    color: var(--textMid);
+}
+
+.setting-section{
+    width: 100%;
+    background: rgba(135, 57, 249,.67);
+    margin: 2rem 0;
+    border-radius: 2rem;
+    display: flex;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.seting-bukaan ul{
+    margin-bottom: 3rem;
+}
+
+.seting-bukaan ul li{
+    background: var(--mainDark);
+    width: 32%;
+    height: 15rem;
+}
+
+.seting-bukaan ul li h2{
+    margin: 0 0 2rem 0;
+}
+
+.form-control{
+    width: 100%;
+    height: 3rem;
+    border-radius: 1.2rem;
+    padding-left: .75rem;
+    box-sizing: border-box;
+    background: var(--secondDark);
+    color: var(--textBright);
+    border: .5px solid var(--textBright);
+    margin-bottom: 2rem;
+}
+
+.form-control:focus{
+    border: 0 solid var(--textBright);
+    border-radius: 1.2rem;
+}
+
+.btn{
+    padding: 1.25rem 8rem 1.25rem .75rem;
+    background: var(--mainColor);
+    border-radius: 2rem;
+    transition: background 0.5s;
+}
+
+.btn:hover{
+    background: #9453f5;
+}
+
+.seting-bukaan form a{
+    color: var(--textBright);
+    font-size: 1.5rem;
+}
+
+/* MOBILE */
+@media only screen and (max-width: 550px) {
+    .seting-bukaan ul li{
+        width: 100%;
+        padding: 2rem;
+    }
+}

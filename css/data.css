@@ -1,0 +1,127 @@
+.data-kontainer{
+    background: var(--secondDark);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.data-left{
+    width: 64%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.small-section {
+    margin: 0;
+}
+.small-section ul li{
+    width: 49%;
+    height: 14.45rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.small-section ul li h2{
+    color: var(--textMid);
+}
+
+.small-section ul li h1{
+    color: var(--textBright);
+}
+
+.small-section ul li:nth-child(1){
+    background-image: url(../asset/image/node_id.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.small-section ul li:nth-child(2){
+    background-image: url(../asset/image/status.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.small-section ul li:nth-child(3){
+    background-image: url(../asset/image/status_lumpur.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.small-section ul li:nth-child(4){
+    background-image: url(../asset/image/arus.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.small-section ul li:nth-child(5){
+    background-image: url(../asset/image/jadwal_pintu.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.small-section ul li:nth-child(6){
+    background-image: url(../asset/image/jadwal_pompa.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.small-section ul li h2{
+    margin: 0;
+}
+
+.data-right{
+    padding: 2rem;
+    width: 35%;
+    height: 46.5rem;
+    background-image: url(../asset/image/kedalaman.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    object-fit: cover;
+    background-position: center;
+    box-sizing: border-box;
+}
+
+.data-right h1{
+    font-size: 3rem;
+}
+
+@media only screen and (max-width: 950px) {
+    .data-kontainer{
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .data-right{
+        width: 100%;
+        margin-bottom: 3rem;
+    }
+
+    .data-left{
+        width: 100%;
+    }
+
+    .small-section ul li{
+        margin-bottom: .5rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .small-section ul li{
+        margin-bottom: .5rem;
+    }
+
+    .small-section ul li:nth-child(5) h1{
+        font-size: 1.75rem;
+    }
+    .small-section ul li:nth-child(6) h1{
+        font-size: 1.4rem;
+    }        
+}

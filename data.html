@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/data.css">
+    <link rel="icon" type="image/gif/png" href="/asset/image/pnj.png">
+    <title>SIC A2D1</title>
+</head>
+<body>
+    <div id="container">
+        
+        <aside>
+            <div class="logo">
+                <h2>A2D1</h2>
+                <img src="/asset/image/pnj.png" alt="">
+            </div>
+
+            <nav>
+                <ul class="nav-item">
+                    <li>
+                        <a href="index.html">
+                            <img src="/asset/image/home.png" alt="">
+                        </a>
+                        <a href="index.html"> <p> Beranda </p></a>
+                    </li>
+                    <li class="aktiv">
+                        <a href="data.html">
+                            <img src="/asset/image/data.png" alt="">
+                        </a>
+                        <a href=""><p>Data</p></a>
+                    </li>
+                    <li>
+                        <a href="setings.html">
+                            <img src="/asset/image/atur.png" alt="">
+                        </a>
+                        <a href="setings.html"><p>Atur Irigasi</p></a>
+                    </li>
+                </ul>
+            </nav>
+            
+        </aside> 
+
+        <main>
+            <div class="logo">
+                <h2>Sistem Irigasi Cerdas</h2>
+            </div>
+
+            <div class="main-konten">
+                <a href="">
+                    <img src="/asset/image/hero.png" alt="">
+                </a>
+
+                <div class="big-section data-kontainer">
+                    <div class="data-left">
+                        <div class="small-section">
+                            <ul>
+                                <li>
+                                    <h2>Node ID</h2>
+                                    <h1 id="node-id">Memuat Data...</h1>
+                                </li>
+                                <li>
+                                    <h2>Status</h2>
+                                    <h1 id="status">Memuat Data...</h1>
+                                </li>
+                                <li>
+                                    <h2>Sedimentasi</h2>
+                                    <h1 id="sedimentasi">Memuat Data...</h1>
+                                </li>
+                                <li>
+                                    <h2>Arus</h2>
+                                    <h1 id="arus">Memuat Data...</h1>
+                                </li>
+                                <li>
+                                    <h2>Data Update</h2>
+                                    <h1 id="data-update" style="color:var(--textBright);">Memuat Data...</h1>
+                                </li>
+                                <li>
+                                    <h2>Jadwal Buka Pintu Air</h2>
+                                    <h1 id="jadwal" style="color:var(--textBright);">Memuat Data...</h1>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="data-right">
+                        <h1>Kedalaman Air</h1>
+                        <h1 id="kedalaman">Memuat Data...</h1>
+                    </div>
+                </div>  
+                
+                <footer>
+                    <div class="footer-left">
+                        <h2>Kompetisi Mahasiswa Bidang Informatikan Politeknik Nasional</h2>
+                        <h2 class="highlight">Bidang IoT</h2>
+                    </div>
+
+                    <div class="footer-right">
+                        <h2>Sistem Ini Dibuat Oleh Tim A2D1 Dari
+                            Politeknik Negeri Jakarta, Yang Beranggotakan
+                            Anisa Safitri - Arif Setiawan - Dimas Aulia</h2>
+                        <h2 class="highlight">Dibimbing oleh
+                            Indra Hermawan</h2>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+</body>
+
+  <!--Firebase Libraries-->
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script> 
+
+  <script id="MainScript">
+    var firebaseConfig = {
+        apiKey: "AIzaSyDfsvq_CPLmSikloOSs4hM-1SErI5SlH64",
+        authDomain: "iotfirstproject-171f3.firebaseapp.com",
+        databaseURL: "https://iotfirstproject-171f3-default-rtdb.firebaseio.com",
+        projectId: "iotfirstproject-171f3",
+        storageBucket: "iotfirstproject-171f3.appspot.com",
+        messagingSenderId: "988133982268",
+        appId: "1:988133982268:web:1c3db0d64c4398487a8339",
+        measurementId: "G-LG78JDGMWS"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    //----------------------------------------------------
+    //READ DATA
+    //----------------------------------------------------
+    function showData(){
+      firebase.database().ref('NODE/Node-101').on('value',function(snapshot){
+        var node_id = snapshot.val().Node_ID;
+        document.getElementById('node-id').innerHTML = node_id;
+
+        var status = snapshot.val().Status;
+        document.getElementById('status').innerHTML = status;
+
+        var sedimentasi= snapshot.val().Mud;
+        document.getElementById('sedimentasi').innerHTML = sedimentasi;
+
+        var arus = snapshot.val().Rpm;
+        document.getElementById('arus').innerHTML = arus;
+
+        var update = snapshot.val().Waktu;
+        document.getElementById('data-update').innerHTML = update;
+
+        var kedalaman = snapshot.val().Kedalaman;
+        document.getElementById('kedalaman').innerHTML = kedalaman + " cm";
+      });
+    }
+
+    function showData2(){
+      firebase.database().ref('Jadwal_Pintu').on('value',function(snapshot){
+        var jadwal = snapshot.val().Jadwal;
+        document.getElementById('jadwal').innerHTML = jadwal;
+        console.log(jadwal);
+      });
+    }
+
+    function loadData(){
+        showData();
+        showData2();
+    }
+
+    window.onload(loadData());
+</script>
+
+
+</html>
