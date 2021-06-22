@@ -168,7 +168,7 @@ aside .logo{
 }
 
 .small-section ul li{
-    width: 22%;
+    width: 30%;
     min-height: 10rem;
     background: rgba(27,27,27,0.67);
     padding: 1rem;
@@ -269,7 +269,7 @@ footer{
 
 @media only screen and (max-width: 690px) {
     .small-section ul li{
-        width: 48%;
+        width: 95%;
         margin-bottom: 2rem;
     }
 
