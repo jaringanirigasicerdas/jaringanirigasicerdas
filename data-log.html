@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/gif/png" href="/asset/image/pnj.png">
+    <link rel="stylesheet" href="css/data-log.css">
+    <title>SIC A2D1</title>
+</head>
+<body>
+    <div id="container">
+        
+        <aside>
+            <div class="logo">
+                <h2>A2D1</h2>
+                <img src="/asset/image/pnj.png" alt="">
+            </div>
+
+            <nav>
+                <ul class="nav-item">
+                    <li>
+                        <a href="index.html">
+                            <img src="/asset/image/home.png" alt="">
+                        </a>
+                        <a href="index.html"> <p> Beranda </p></a>
+                    </li>
+                    <li class="aktiv">
+                        <a href="data.html">
+                            <img src="/asset/image/data.png" alt="">
+                        </a>
+                        <a href="data.html"><p>Data</p></a>
+                    </li>
+                    <li >
+                        <a href="setings.html">
+                            <img src="/asset/image/atur.png" alt="">
+                        </a>
+                        <a href="setings.html"><p>Atur Irigasi</p></a>
+                    </li>
+                </ul>
+            </nav>
+            
+        </aside> 
+
+        <main>
+            <div class="logo">
+                <h2>Sistem Irigasi Cerdas</h2>
+            </div>
+
+            <div class="main-konten">
+                <a href="/asset/app/SIC A2D1.apk" download="SIC A2D1.apk">
+                    <img src="/asset/image/hero.png" alt="">
+                </a>
+
+                <!-- <div class="big-section">
+                    <center>
+                        <h1>Node Location</h1>
+                        <div class="map" id="map"></div>
+                    </center>
+                </div> -->
+
+                <div class="big-section">
+                    <h1 style="margin: 2rem;">Data Log</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              <th scope="col">No</th>
+                              <th scope="col">ID Pintu Air</th>
+                              <th scope="col">Kedalaman Air</th>
+                              <th scope="col">Arus Air</th>
+                              <th scope="col">Lumpur</th>
+                              <th scope="col">Waktu</th>
+                            </tr>
+                          </thead>
+                          <tbody id="data">        
+                                  <!-- di dalam tbody buat satu tr baru dengan isi td -->   
+                          </tbody>    
+                    </table>
+                </div>  
+                
+
+                <footer>
+                    <div class="footer-left">
+                        <h2>Kompetisi Mahasiswa Bidang Informatikan Politeknik Nasional</h2>
+                        <h2 class="highlight">Bidang IoT</h2>
+                    </div>
+
+                    <div class="footer-right">
+                        <h2>Sistem Ini Dibuat Oleh Tim A2D1 Dari
+                            Politeknik Negeri Jakarta, Yang Beranggotakan
+                            Anisa Safitri - Arif Setiawan - Dimas Aulia</h2>
+                        <h2 class="highlight">Dibimbing oleh
+                            Indra Hermawan</h2>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+</body>
+
+<!--Firebase Libraries-->
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script> 
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_p2-9jTc9Q8IooGNEq-4egCApkLGtXRI&callback=initMap" type="text/javascript"></script>
+
+
+<!-- MAPS -->
+<script id="MainScript">
+  var firebaseConfig = {
+      apiKey: "AIzaSyDfsvq_CPLmSikloOSs4hM-1SErI5SlH64",
+      authDomain: "iotfirstproject-171f3.firebaseapp.com",
+      databaseURL: "https://iotfirstproject-171f3-default-rtdb.firebaseio.com",
+      projectId: "iotfirstproject-171f3",
+      storageBucket: "iotfirstproject-171f3.appspot.com",
+      messagingSenderId: "988133982268",
+      appId: "1:988133982268:web:1c3db0d64c4398487a8339",
+      measurementId: "G-LG78JDGMWS"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  //----------------------------------------------------
+  //READ DATA
+  //----------------------------------------------------
+  var stdNo = 0;
+    function addItemsToList(id,kedalaman,arus,lumpur,waktu){
+        var td      = document.getElementById('data');
+        var header  = document.createElement('td');
+        var tr      = document.createElement('tr');
+
+        var id_         = document.createElement('td');
+        var kedalaman_  = document.createElement('td');
+        var arus_       = document.createElement('td');
+        var lumpur_     = document.createElement('td');
+        var waktu_      = document.createElement('td');
+
+        header.innerHTML = (++stdNo);
+        id_.innerHTML           = id;
+        kedalaman_.innerHTML    = kedalaman;
+        arus_.innerHTML         = arus;
+        lumpur_.innerHTML       = lumpur;
+        waktu_.innerHTML        = waktu;
+
+        tr.append(header);
+        tr.append(id_);
+        tr.append(kedalaman_);
+        tr.append(arus_);
+        tr.append(lumpur_);
+        tr.append(waktu_);
+        td.append(tr);
+        console.log("Berhasil");
+    }
+
+    function FetchAllData(){
+        firebase.database().ref('NODE_LOG/Node-101').once('value',function(snapshot){
+            snapshot.forEach(
+                function(ChildSnapshot){
+                    let id = ChildSnapshot.val().Node_ID;
+                    let kedalaman= ChildSnapshot.val().Kedalaman;
+                    let arus = ChildSnapshot.val().Rpm;
+                    let lumpur = ChildSnapshot.val().Mud;
+                    let waktu = ChildSnapshot.val().Waktu;
+                    addItemsToList(id,kedalaman,arus,lumpur,waktu)
+                }
+            );
+        });
+    }
+    // document.onload(FetchAllData());
+
+    // window.onload = function(){
+    //   FetchAllData();
+    // };
+
+  window.onload = function(){
+      FetchAllData();
+  };
+
+</script>
+
+</html>
