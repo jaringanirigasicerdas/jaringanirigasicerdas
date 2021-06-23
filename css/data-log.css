@@ -15,3 +15,12 @@ table tbody{
     font-size: 1.35rem;
     text-align: center;
 }
+
+.map{
+    height: 500px;
+    border-radius: 2rem;
+}
+
+#node{
+    color: var(--secondDark);
+}

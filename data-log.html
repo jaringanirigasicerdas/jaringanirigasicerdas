@@ -53,12 +53,12 @@
                     <img src="/asset/image/hero.png" alt="">
                 </a>
 
-                <!-- <div class="big-section">
+                <div class="big-section">
                     <center>
-                        <h1>Node Location</h1>
+                        <h1 style="margin-bottom: 2rem;">Node Location</h1>
                         <div class="map" id="map"></div>
                     </center>
-                </div> -->
+                </div>
 
                 <div class="big-section">
                     <h1 style="margin: 2rem;">Data Log</h1>
@@ -174,10 +174,66 @@
     //   FetchAllData();
     // };
 
+//   window.onload = function(){
+//       FetchAllData();
+//   };
+
+  var map;
+  var InfoObj = [];
+  var centerCords ={
+      lat: -6.366204, 
+      lng: 106.820784
+};
+
+  var icons = {
+      info: {
+          icon: '/asset/image/icons8-rfid-sensor-30.png'
+      }
+  }
+
+  var markersOnMap = [
+      {
+          placeName : "Node-101",
+          LatLng: [{
+              lat: -6.366204,
+              lng: 106.820784
+          }],
+          type: 'info',
+      },
+  ]
+
+  function addMarkerInfo(){
+      for(var i = 0; i < markersOnMap.length; i++){
+          var contentString = '<h3 id="node">' + markersOnMap[i].placeName + '</h3>';
+          
+          const marker = new google.maps.Marker({
+              position: markersOnMap[i].LatLng[0],
+              icon: icons[markersOnMap[i].type].icon,
+              map: map
+          });
+
+          const infowindow = new google.maps.InfoWindow({
+              content: contentString,
+          });
+
+          marker.addListener("click", function() {
+              infowindow.open(map, marker);
+          });
+      }
+  }
+
+  function initMap(){
+      map = new google.maps.Map(document.getElementById('map'),{
+          zoom: 15,
+          center: centerCords
+      });
+      addMarkerInfo()
+  }
+
   window.onload = function(){
+      initMap();
       FetchAllData();
   };
-
 </script>
 
 </html>
