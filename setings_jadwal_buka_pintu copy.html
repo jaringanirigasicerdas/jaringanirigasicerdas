@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/detail_setings_jadwal.css">
     <link rel="icon" type="image/gif/png" href="/asset/image/pnj.png">
-    <title>SIC A2D1</title>
+    <style>
+        .small-section ul{
+            justify-content:space-around;
+        }
+    </style>
+    <title>SIC ABIWARA</title>
 </head>
 <body>
     <div id="container">
@@ -30,7 +35,7 @@
                         <a href="data.html">
                             <img src="/asset/image/data.png" alt="">
                         </a>
-                        <a href=""><p>Data</p></a>
+                        <a href="data.html"><p>Data</p></a>
                     </li>
                     <li class="aktiv">
                         <a href="setings.html">
@@ -63,17 +68,19 @@
                                     <li>
                                         <h2>Pilih Node Sensor</h2>
                                         <select class="form-control" id="gate">
-                                            <option value="101">Pintu 101</option>
+                                            <option value="10">Pintu 10</option>
+                                            <option value="20">Pintu 20</option>
+                                            <option value="30">Pintu 30</option>
                                         </select>
                                     </li>
                                     <li>
                                         <h2>Pilih Tinggi Bukaan</h2>
                                         <select class="form-control" id="bukaan">
-                                            <option value="750">Buka 10%</option>
-                                            <option value="1125">Buka 30%</option>
-                                            <option value="1500">Buka 50%</option>
-                                            <option value="1875">Buka 80%</option>
-                                            <option value="2500">Buka 100%</option>
+                                            <option value="10">Buka 10%</option>
+                                            <option value="30">Buka 30%</option>
+                                            <option value="50">Buka 50%</option>
+                                            <option value="80">Buka 80%</option>
+                                            <option value="100">Buka 100%</option>
                                         </select>
                                     </li>
                                     <li>
@@ -104,12 +111,7 @@
                                 <h2>Atur Bukaan Pintu Air</h2>
                                 <a href="setings_buka_pintu.html">Kepengaturan ⚙</a>   
                             </li>
-                            </li>
-                            <li>
-                                <img src="/asset/image/fix.png" alt="">
-                                <h2>Atur Penyedotan Lumpur</h2>
-                                <a href="setings_lumpur.html"">Kepengaturan ⚙</a>   
-                            </li>
+
                             <li>
                                 <img src="/asset/image/clock.png" alt="">
                                 <h2>Penjadwalan Bukaan Pintu Air</h2>
@@ -160,7 +162,7 @@
     //INSERT DATA
     //----------------------------------------------------
     document.getElementById('atur').onclick = function(){
-        firebase.database().ref('Jadwal_Pintu').set({
+        firebase.database().ref('Jadwal_Pintu/Node-10').set({
             Bukaan : document.getElementById("bukaan").value,
             Durasi : document.getElementById("lama-waktu").value,
             Gate : document.getElementById("gate").value,

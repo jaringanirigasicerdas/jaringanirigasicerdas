@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/gif/png" href="/asset/image/pnj.png">
     <link rel="stylesheet" href="css/data-log.css">
-    <title>SIC A2D1</title>
+    <title>SIC ABIWARA</title>
 </head>
 <body>
     <div id="container">
         
         <aside>
             <div class="logo">
-                <h2>A2D1</h2>
+                <h2>Abiwara</h2>
                 <img src="/asset/image/pnj.png" alt="">
             </div>
 
@@ -67,9 +67,9 @@
                             <tr>
                               <th scope="col">No</th>
                               <th scope="col">ID Pintu Air</th>
-                              <th scope="col">Kedalaman Air</th>
+                              <th scope="col">Ketinggian Air</th>
                               <th scope="col">Arus Air</th>
-                              <th scope="col">Lumpur</th>
+                              <th scope="col">Kebutuhan Air</th>
                               <th scope="col">Waktu</th>
                             </tr>
                           </thead>
@@ -82,14 +82,14 @@
 
                 <footer>
                     <div class="footer-left">
-                        <h2>Kompetisi Mahasiswa Bidang Informatikan Politeknik Nasional</h2>
-                        <h2 class="highlight">Bidang IoT</h2>
+                        <h2>Agricultural Innovation Technology Competition</h2>
+                        <h2 class="highlight">Bidang Inovasi</h2>
                     </div>
 
                     <div class="footer-right">
-                        <h2>Sistem Ini Dibuat Oleh Tim A2D1 Dari
+                        <h2>Sistem Ini Dibuat Oleh Tim Abiwara Dari
                             Politeknik Negeri Jakarta, Yang Beranggotakan
-                            Anisa Safitri - Arif Setiawan - Dimas Aulia</h2>
+                            Anisa Safitri - Dimas Aulia - Nisrina Tsany</h2>
                         <h2 class="highlight">Dibimbing oleh
                             Indra Hermawan</h2>
                     </div>
@@ -126,7 +126,7 @@
   //READ DATA
   //----------------------------------------------------
   var stdNo = 0;
-    function addItemsToList(id,kedalaman,arus,lumpur,waktu){
+    function addItemsToList(id,kedalaman,arus,kebutuhan_air,waktu){
         var td      = document.getElementById('data');
         var header  = document.createElement('td');
         var tr      = document.createElement('tr');
@@ -141,7 +141,7 @@
         id_.innerHTML           = id;
         kedalaman_.innerHTML    = kedalaman;
         arus_.innerHTML         = arus;
-        lumpur_.innerHTML       = lumpur;
+        lumpur_.innerHTML       = kebutuhan_air;
         waktu_.innerHTML        = waktu;
 
         tr.append(header);
@@ -155,28 +155,19 @@
     }
 
     function FetchAllData(){
-        firebase.database().ref('NODE_LOG/Node-101').once('value',function(snapshot){
+        firebase.database().ref('NODE-LOG/Node-10').once('value',function(snapshot){
             snapshot.forEach(
                 function(ChildSnapshot){
                     let id = ChildSnapshot.val().Node_ID;
-                    let kedalaman= ChildSnapshot.val().Kedalaman;
-                    let arus = ChildSnapshot.val().Rpm;
-                    let lumpur = ChildSnapshot.val().Mud;
+                    let kedalaman= ChildSnapshot.val().Ketinggian_Air;
+                    let arus = ChildSnapshot.val().Arus;
+                    let kebutuhan_air = ChildSnapshot.val().Kebutuhan_Air;
                     let waktu = ChildSnapshot.val().Waktu;
-                    addItemsToList(id,kedalaman,arus,lumpur,waktu)
+                    addItemsToList(id,kedalaman,arus,kebutuhan_air,waktu)
                 }
             );
         });
     }
-    // document.onload(FetchAllData());
-
-    // window.onload = function(){
-    //   FetchAllData();
-    // };
-
-//   window.onload = function(){
-//       FetchAllData();
-//   };
 
   var map;
   var InfoObj = [];

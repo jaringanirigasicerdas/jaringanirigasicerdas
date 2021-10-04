@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/data.css">
     <link rel="icon" type="image/gif/png" href="/asset/image/pnj.png">
-    <title>SIC A2D1</title>
+    <title>SIC ABIWARA</title>
 </head>
 <body>
     <div id="container">
         
         <aside>
             <div class="logo">
-                <h2>A2D1</h2>
+                <h2>Abiwara</h2>
                 <img src="/asset/image/pnj.png" alt="">
             </div>
 
@@ -66,7 +66,7 @@
                                     <h1 id="status">Memuat Data...</h1>
                                 </li>
                                 <li>
-                                    <h2>Sedimentasi</h2>
+                                    <h2>Kebutuhan Air</h2>
                                     <h1 id="sedimentasi">Memuat Data...</h1>
                                 </li>
                                 <li>
@@ -94,14 +94,14 @@
                 
                 <footer>
                     <div class="footer-left">
-                        <h2>Kompetisi Mahasiswa Bidang Informatikan Politeknik Nasional</h2>
-                        <h2 class="highlight">Bidang IoT</h2>
+                        <h2>Agricultural Innovation Technology Competition</h2>
+                        <h2 class="highlight">Bidang Inovasi</h2>
                     </div>
 
                     <div class="footer-right">
-                        <h2>Sistem Ini Dibuat Oleh Tim A2D1 Dari
+                        <h2>Sistem Ini Dibuat Oleh Tim Abiwara Dari
                             Politeknik Negeri Jakarta, Yang Beranggotakan
-                            Anisa Safitri - Arif Setiawan - Dimas Aulia</h2>
+                            Anisa Safitri - Dimas Aulia - Nisrina Tsany</h2>
                         <h2 class="highlight">Dibimbing oleh
                             Indra Hermawan</h2>
                     </div>
@@ -134,29 +134,64 @@
     //READ DATA
     //----------------------------------------------------
     function showData(){
-      firebase.database().ref('NODE/Node-101').on('value',function(snapshot){
+      firebase.database().ref('NODE/Node-10').on('value',function(snapshot){
         var node_id = snapshot.val().Node_ID;
         document.getElementById('node-id').innerHTML = node_id;
 
-        var status = snapshot.val().Status;
+        var status = snapshot.val().Status_Ketinggian;
+        switch(status) {
+            case 0:
+                status = "Rendah (Aman)";
+                break;
+            case 1:
+                status = "Sedang (Waspada)";
+                break;
+            case 2:
+                status = "Tinggi (Berbahaya)";
+                break;
+            default:
+                status = "Error";
+        }
         document.getElementById('status').innerHTML = status;
 
-        var sedimentasi= snapshot.val().Mud;
-        document.getElementById('sedimentasi').innerHTML = sedimentasi;
-
-        var arus = snapshot.val().Rpm;
+        var kebuthan_air= snapshot.val().Kebutuhan_Air;
+        switch(kebuthan_air) {
+        case 0:
+            kebuthan_air = "Rendah";
+            break;
+        case 1:
+            kebuthan_air = "Sedang";
+            break;
+        case 2:
+            kebuthan_air = "Tinggi";
+            break;
+        default:
+            kebuthan_air = "Error";
+        }
+        document.getElementById('sedimentasi').innerHTML = kebuthan_air;
+        var arus = snapshot.val().Arus;
+        switch(arus) {
+            case 0:
+                arus = "Pelan";
+                break;
+            case 2:
+                arus = "Cepat";
+                break;
+            default:
+                arus = "Error";
+        }
         document.getElementById('arus').innerHTML = arus;
 
         var update = snapshot.val().Waktu;
         document.getElementById('data-update').innerHTML = update;
 
-        var kedalaman = snapshot.val().Kedalaman;
+        var kedalaman = snapshot.val().Ketinggian_Air;
         document.getElementById('kedalaman').innerHTML = kedalaman + " cm";
       });
     }
 
     function showData2(){
-      firebase.database().ref('Jadwal_Pintu').on('value',function(snapshot){
+      firebase.database().ref('Jadwal_Pintu/Node-10').on('value',function(snapshot){
         var jadwal = snapshot.val().Jadwal;
         document.getElementById('jadwal').innerHTML = jadwal;
         console.log(jadwal);
